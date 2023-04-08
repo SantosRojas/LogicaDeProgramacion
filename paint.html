@@ -1,0 +1,74 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+    var pantalla = document.querySelector('canvas');
+    var pincel = pantalla.getContext('2d');
+
+    pincel.fillStyle = 'lightgrey';
+    pincel.fillRect(0, 0, 600, 400);
+
+    var puedoDibujar = false;
+    var drawColor = "blue"
+
+    //paletad de colores
+    pincel.fillStyle = 'blue';
+    pincel.beginPath();
+    pincel.arc(530, 20, 10, 0, 2 * 3.14);
+    pincel.fill();
+
+    pincel.fillStyle = 'green';
+    pincel.beginPath();
+    pincel.arc(555, 20, 10, 0, 2 * 3.14);
+    pincel.fill();
+
+    pincel.fillStyle = 'red';
+    pincel.beginPath();
+    pincel.arc(580, 20, 10, 0, 2 * 3.14);
+    pincel.fill();
+
+    function changeColor(e){
+        var x = e.x-pantalla.offsetLeft;
+        var y = e.y-pantalla.offsetTop;
+
+        if(Math.sqrt((x-530)**2 +(y-20)**2)<10){
+            drawColor ="blue";
+        }if(Math.sqrt((x-555)**2+(y-20)**2)<10){
+            drawColor ="green";
+        }if(Math.sqrt((x-580)**2+(y-20)**2)<10){
+            drawColor ="red";
+        }
+
+    }
+
+    function dibujarCirculo(evento) {
+
+        if(puedoDibujar) {
+            var x = evento.pageX - pantalla.offsetLeft;
+            var y = evento.pageY - pantalla.offsetTop;
+            pincel.fillStyle = drawColor;
+            pincel.beginPath();
+            pincel.arc(x, y, 2, 0, 2 * 3.14);
+            pincel.fill();
+        }
+
+    }
+
+    pantalla.onmousemove = dibujarCirculo;
+
+    function habilitarDibujar() {
+
+        puedoDibujar = true;
+    }
+
+    function deshabilitarDibujar() {
+
+        puedoDibujar = false;
+    }
+
+    pantalla.onmousedown = habilitarDibujar;
+
+    pantalla.onmouseup = deshabilitarDibujar;
+    
+    pantalla.onclick = changeColor;
+
+</script>

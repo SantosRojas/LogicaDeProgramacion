@@ -1,0 +1,31 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+    var canva = document.querySelector("canvas");
+    var pincel = canva.getContext("2d");
+    pincel.fillStyle = "lightgray"
+    pincel.fillRect(0,0,600,400)
+
+    function drawCircle(x,y,radio,color){
+        pincel.fillStyle = color;
+        pincel.beginPath();
+        pincel.arc(x, y, radio, 0, 2*3.14);
+        pincel.fill();
+    }
+
+    //Dibujado la flor
+    function drawFlower(x,y,radio,colors){
+        drawCircle(x,y,50,'purple')
+        var xx;
+        var yy;
+        n_circles = colors.length
+        for (var c = 0;c<n_circles;c++){
+            xx=x+2*radio*Math.cos(2*Math.PI*c/n_circles)
+            yy=y+2*radio*Math.sin(2*Math.PI*c/n_circles)
+            drawCircle(xx,yy,radio,colors[c])
+        }
+    }
+
+    drawFlower(300,200,50,['blue','red','cyan','green','black','yellow'])
+
+</script>

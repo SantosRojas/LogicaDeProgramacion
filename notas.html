@@ -1,0 +1,41 @@
+<canvas width="600" height="400"></canvas>
+<script>
+    var canva = document.querySelector("canvas");
+    var pincel = canva.getContext("2d");
+    var colors = ["blue","red","green"]//juego de colores a conmutar
+    var idColor = 0; //indicador del color actual
+
+    pincel.fillStyle = "lightgray"
+    pincel.fillRect(0,0,600,400)
+    pincel.fill()
+
+    pincel.fillStyle = colors[0]
+
+    function drawCircle(x,y,radio){
+        pincel.beginPath()
+        pincel.arc(x,y,radio,0,2*Math.PI)
+        pincel.fill()
+    }
+
+    function writer(evento){
+        var x = evento.x;
+        var y = evento.y;
+        drawCircle(x,y,10,'blue')
+
+    }
+
+    function changeColor(){
+        if (idColor==3){
+            idColor=0;
+        }else{
+            idColor++;
+        }
+        pincel.fillStyle = colors[idColor];
+        return false
+
+    }
+
+    canva.oncontextmenu = changeColor;
+
+    canva.onclick = writer;
+</script>

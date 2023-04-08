@@ -1,0 +1,20 @@
+<meta charset="UTF-8">
+<input/>
+<button>Verificar</button>
+
+<script>
+    var numero = document.querySelector("input");
+    var secreto =1;
+
+    function verificar(){
+        if (parseInt(numero.value) == secreto){
+            alert("usted acerto")
+        }
+        else{
+            alert("usted erro")
+        }
+    }
+
+    var boton = document.querySelector("button")
+    boton.onclick= verificar;
+</script>
